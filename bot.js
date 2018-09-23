@@ -72,6 +72,7 @@ const perfix = '#'
 const fs = require('fs');
  let logs = JSON.parse(fs.readFileSync(`./logs.json`, `utf8`)); // BY ! - NourEldien.#8007
 client.on('message', message => {
+    var perfix = "#"
   if(!logs[message.guild.id]) logs[message.guild.id] = {
   onoff: 'Off',
   channel: 'logs' // BY ! - NourEldien.#8007
