@@ -19,7 +19,6 @@ client.on('ready', () => {
 
 
 
-1 - حت الكود
 
     const fs = require('fs')
 
