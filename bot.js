@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-
+const perfix = "!";
 const client = new Discord.Client();
 
 client.on('ready', () => {
@@ -10,7 +10,7 @@ client.on('ready', () => {
 
     console.log(`[NAWAF] ${client.users.size}`)
 
-    client.user.setStatus("online")
+    client.user.setStatus("ldle")
 
 });
 
