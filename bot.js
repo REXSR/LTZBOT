@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
+const perfix = "!";
 client.on('ready', () => {
 
     console.log(`Logged in as ${client.user.tag}!`);
@@ -9,7 +9,7 @@ client.on('ready', () => {
 
     console.log(`[NAWAF] ${client.users.size}`)
 
-    client.user.setStatus("ldle")
+    client.user.setStatus("online")
 
 });
 
@@ -24,7 +24,7 @@ client.on('ready', () => {
 let points = JSON.parse(fs.readFileSync('./Points.json', 'utf8'));
 
 client.on('message', message => {
- const perfix = "!";
+ var perfix = "!";
 if (!points[message.author.id]) points[message.author.id] = {
 
     points: 50,
