@@ -25,7 +25,7 @@ client.on('ready', () => {
 let points = JSON.parse(fs.readFileSync('./Points.json', 'utf8'));
 
 client.on('message', message => {
-
+ var perfix = "!";
 if (!points[message.author.id]) points[message.author.id] = {
 
     points: 50,
