@@ -618,11 +618,187 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
     }
 });
 
+var data = JSON.parse(fs.readFileSync('data.json','utf8'))
+client.on('guildMemberRemove', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `MEMBER_KICK`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
+});
+client.on('roleDelete', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `ROLE_DELETE`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
+});
+client.on('channelDelete', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `CHANNEL_DELETE`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
 
 
 
+   const fs = require("fs");
+const ms = require("ms");
+let warns = JSON.parse(fs.readFileSync("./warnings.json"));;
+const client = new Discord.Client();
 
-   
+
+client.on('message', async message => {
+
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "warn") { //??? ???????
+
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+
+  if (message.mentions.users.size < 1) return message.reply("**???? ???**");
+  if(!reason) return message.reply ("**???? ??? ?????**");
+
+
+  if(!warns[user.id]) warns[user.id] = {
+    warns: 0
+  };
+
+  warns[user.id].warns++;
+
+  fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
+    if (err) console.log(err)
+  });
+
+
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(`WARNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+   client.channels.find('name', 'log').send({
+    embed : banembed
+  })
+  
+    if(warns[user.id].warns == 2){ //??? ???????? ??????
+    let muterole = message.guild.roles.find(`name`, "Muted");
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#000000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+    
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.reply("**??? ???? ?????? ?????**:x: ") .then(m => m.delete(5000));
+    
+    let mutetime = "60s";
+    await(tomute.addRole(muterole.id));
+    message.channel.send(`<@${user.id}> has been temporarily muted`);
+
+    setTimeout(async function(){
+    await(tomute.removeRole(muterole.id));
+      message.reply(`<@${user.id}> has been unmuted.`)
+    }, ms(mutetime))
+  }
+  if(warns[user.id].warns == 3){  //??? ???????? ??????
+    message.guild.member(user).ban(reason);
+    message.reply(`<@${user.id}> has been banned.`)
+  }
+
+}
+}
+);
     
             
  
