@@ -643,7 +643,6 @@ client.on('message', async message => {
 
 
 client.on('message', message => {
-   var prefix "!";
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
