@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const perfix = "!";
+const prefix = "!";
 client.on('ready', () => {
 
     console.log(`Logged in as ${client.user.tag}!`);
@@ -643,6 +643,7 @@ client.on('message', async message => {
 
 
 client.on('message', message => {
+   var prefix "!";
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
