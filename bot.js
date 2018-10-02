@@ -663,6 +663,31 @@ message.channel.send(args.join("  "))
 });            
           
 
+client.on('message', message => {
+   if (message.content.startsWith("!id")) {
+                if(!message.channel.guild) return message.reply('**هذا الامر فقط في السيرفرات وشكرا**');
+
+               var mentionned = message.mentions.users.first();
+    var mentionavatar;
+      if(mentionned){
+          var mentionavatar = mentionned;
+      } else {
+          var mentionavatar = message.author;
+          
+      }
+   let embed = new Discord.RichEmbed()
+  .setColor("RANDOM")
+   .setThumbnail(`${mentionavatar.avatarURL}`)
+  .addField("الاسم:",`<@` + `${mentionavatar.id}` + `>`, true)
+   .addField('ايديك:',"" +  Sal.author.id, true)
+   .addField('تاقك:', Sal.author.discriminator, true)
+  .addField("تم الانشاء في:", "**[" + `${mentionavatar.createdAt}` + "]**", true)
+ .addField("تاريخ دخولك للسيرفر:", message.member.joinedAt.toLocaleString())   
+     
+  message.channel.sendEmbed(embed);
+  console.log('[id] Send By: ' + message.author.username)
+    }
+});
 
 
  
