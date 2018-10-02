@@ -682,10 +682,10 @@ client.on('message', message => {
    .addField("ايديك:", "**[" + `${Sal.author.id}` + "]**", true)
    .addField("تاقك:", "**[" + `${Sal.author.discriminator}` + "]**", true)
   .addField("تم الانشاء في:", "**[" + `${mentionavatar.createdAt}` + "]**", true)
- .addField("تاريخ دخولك للسيرفر:", ", "**[" + `${message.member.joinedAt.toLocaleString}` + "]**", true)   
+ .addField("تاريخ دخولك للسيرفر:", ", "**[" + `${sal.message.member.joinedAt.toLocaleString}` + "]**", true)   
      
   message.channel.sendEmbed(embed);
-  console.log('[id] Send By: ' + message.author.username)
+  console.log("[id] Send By: " + message.author.username)
     }
 });
 
