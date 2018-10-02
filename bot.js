@@ -680,9 +680,9 @@ client.on('message', message => {
    .setThumbnail(`${mentionavatar.avatarURL}`)
   .addField("الاسم:",`<@` + `${mentionavatar.id}` + `>`, true)
    .addField('ايديك:',"" +  Sal.author.id, true)
-   .addField('تاقك:', Sal.author.discriminator, true)
+   .addField('تاقك:", "**[" + `${Sal.author.discriminator}` + "]**", true)
   .addField("تم الانشاء في:", "**[" + `${mentionavatar.createdAt}` + "]**", true)
- .addField("تاريخ دخولك للسيرفر:", message.member.joinedAt.toLocaleString())   
+ .addField("تاريخ دخولك للسيرفر:", ", "**[" + `${message.member.joinedAt.toLocaleString}` + "]**", true)   
      
   message.channel.sendEmbed(embed);
   console.log('[id] Send By: ' + message.author.username)
