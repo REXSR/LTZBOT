@@ -9,7 +9,7 @@ client.on('ready', () => {
 
     console.log(`[NAWAF] ${client.users.size}`)
 
-    client.user.setStatus("online")
+    client.user.setStatus("online")   
 
 });
 
@@ -679,8 +679,8 @@ client.on('message', message => {
   .setColor("RANDOM")
    .setThumbnail(`${mentionavatar.avatarURL}`)
   .addField("الاسم:",`<@` + `${mentionavatar.id}` + `>`, true)
-   .addField('ايديك:',"" +  Sal.author.id, true)
-   .addField('تاقك:", "**[" + `${Sal.author.discriminator}` + "]**", true)
+   .addField("ايديك:", "**[" + `${Sal.author.id}` + "]**", true)
+   .addField("تاقك:", "**[" + `${Sal.author.discriminator}` + "]**", true)
   .addField("تم الانشاء في:", "**[" + `${mentionavatar.createdAt}` + "]**", true)
  .addField("تاريخ دخولك للسيرفر:", ", "**[" + `${message.member.joinedAt.toLocaleString}` + "]**", true)   
      
