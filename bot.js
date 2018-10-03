@@ -708,7 +708,9 @@ client.on('message', message => {
 
        .setColor('RANDOM')
 
-       .setTitle('Broadcast')
+         .setTitle('لي دخول السيرفر اضغط هنا')
+       
+       .setURL('https://discord.gg/uybCHRz')
 
        .addField('Server', message.guild.name)
 
