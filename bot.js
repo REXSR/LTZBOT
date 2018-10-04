@@ -743,19 +743,6 @@ client.on('message', message => {
  
  
 
-// *
- 
-// Required Packages | البكجات المطلوبة
-// npm i discord.js
-// npm i get-youtube-id
-// npm i youtube-info
-// npm i youtube-api
-// npm i simple-youtube-api
-// npm i ytdl-core
-// npm i fs
-// npm i gif-search
- 
-//*
  
  
  
