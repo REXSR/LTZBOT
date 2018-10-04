@@ -14,13 +14,14 @@ client.on('ready', () => {
 });
 
 
+
 const errmsg = "حدث خطا في البوت , سوف يتم اصلاحه في اقرب وقت "
 
 function errormsg(message, err, cmd) {
 
     message.channel.send(errmsg) 
 
-    client.channels.get("ايدي الروم").send(`**:warning: Error**`, {embed: {
+    client.channels.get("470698398559895572").send(`**:warning: Error**`, {embed: {
 
     description: `\`\`\`${err}\`\`\` `,
 
@@ -47,11 +48,6 @@ function errormsg(message, err, cmd) {
         }, 
 
         {
-        
-        
-        
-        
-client.login(process.env.BOT_TOKEN);
 
         name: "**command**",
 
@@ -84,3 +80,15 @@ usage: usage
 }
 
 }
+       
+
+        
+        
+        
+        
+        
+
+
+
+
+client.login(process.env.BOT_TOKEN);
