@@ -13,73 +13,52 @@ client.on('ready', () => {
 
 });
 
+@everyone | @here
 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const errmsg = "حدث خطا في البوت , سوف يتم اصلاحه في اقرب وقت "
+Code Alphacopyright arrow_down            
 
-function errormsg(message, err, cmd) {
+client.on("message", (message) => {
 
-    message.channel.send(errmsg) 
+if (message.content.startsWith("-ct")) {
 
-    client.channels.get("470698398559895572").send(`**:warning: Error**`, {embed: {
+            if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
 
-    description: `\`\`\`${err}\`\`\` `,
+        let args = message.content.split(" ").slice(1);
 
-    fields: [
+    message.guild.createChannel(args.join(' '), 'text');
 
-        {
-
-        name: "**server**",
-
-        value: message.guild.name,
-
-        inline: true
-
-        }, 
-
-        {
-
-        name: "**user**",
-
-        value: message.author.username,
-
-        inline: true
-
-        }, 
-
-        {
-
-        name: "**command**",
-
-        value: cmd,
-
-        inline: true
-
-        }
-
-    ]}})
-
-    return; 
+message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
 
 }
 
-function helpcmd(commands, cmd, role, group, desc, usage) {
+});
 
-commands[cmd] = {
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-name: cmd,
+وصف الكود: كود انشاء روم كتابي
 
-role: role,
+تم النشر بواسطة: @- SB |LEGEND_YT
 
-group: group,
 
-desc: desc,
 
-usage: usage
 
-}
 
-}
+
+
+
+    
+
+        
+
+
+
+
+
+
+
+
        
 
         
