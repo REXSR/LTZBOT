@@ -25,7 +25,8 @@ if (message.content.startsWith("cc")) {
 
         let args = message.content.split(" ").slice(1);
 
-    message.guild.createChannel(args.join(' '), 'Category');
+    message.guild.createChannel(args.join(' '),
+ 'Category');
 
 message.channel.sendMessage('Category تـم إنـشاء روم')
 
