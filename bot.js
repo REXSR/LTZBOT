@@ -12,34 +12,30 @@ client.on('ready', () => {
     client.user.setStatus("online")   
 
 });
+   
 
-@everyone | @here
 
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-Code Alphacopyright arrow_down            
 
 client.on("message", (message) => {
 
-if (message.content.startsWith("-ct")) {
+if (message.content.startsWith("cc")) {
 
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
 
         let args = message.content.split(" ").slice(1);
 
-    message.guild.createChannel(args.join(' '), 'text');
+    message.guild.createChannel(args.join(' '), 'Category');
 
-message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
+message.channel.sendMessage('Category تـم إنـشاء روم')
 
 }
 
 });
 
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-وصف الكود: كود انشاء روم كتابي
 
-تم النشر بواسطة: @- SB |LEGEND_YT
+
 
 
 
