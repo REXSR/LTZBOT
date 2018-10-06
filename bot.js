@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = "!";
+const prefix = "-";
 client.on('ready', () => {
 
     console.log(`Logged in as ${client.user.tag}!`);
@@ -15,24 +15,50 @@ client.on('ready', () => {
    
 
 
+client.on("message", async message => {
+       var prefix = "-";
+    if(message.content == prefix+"فكك"){
+        if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
+        UserBlocked.add(message.guild.id)
+        var ask = fkk[Math.floor(Math.random() * fkk.length)];
+        let embed = new Discord.RichEmbed()
+        .setTitle('لعبة فكك')
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor("RANDOM")
+        .setDescription(ask.f);
+        message.channel.sendEmbed(embed).then(msg=> msg.delete(200000))
+        const msgs = await message.channel.awaitMessages(msg => msg.author.id !== client.user.id ,{maxMatches:1,time:100000});
+            UserBlocked.delete(message.guild.id)
+        msgs.forEach(result => {
+           if(result.author.id == client.user.id) return;
+           if(result.content == "فكك") return
+           if(result.content == ask.k){
 
+             let embeds = new Discord.RichEmbed()
+             .setTitle(':white_check_mark: اجابة صحيحة')
+             .setAuthor(message.author.username, message.author.avatarURL)
+             .setColor("RANDOM")
+             .setDescription(`**${result.author.username}** الإجابة صحيحة`);
+                message.channel.sendEmbed(embeds);                return;
+           } else {
 
-client.on("message", (message) => {
+                               var embedx = new Discord.RichEmbed()
+             .setTitle(':x:خطاء')
+             .setAuthor(message.author.username, message.author.avatarURL)
+             .setColor("RANDOM")
+             .setDescription(`**${result.author.username}** الإجابة خاطئة`);
 
-if (message.content.startsWith("cc")) {
-
-            if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
-
-        let args = message.content.split(" ").slice(1);
-
-    message.guild.createChannel(args.join(' '),
- 'Category');
-
-message.channel.sendMessage('Category تـم إنـشاء روم')
-
-}
-
+                message.channel.sendEmbed(embedx);
+           }
+     });
+  }
 });
+
+
+
+
+
+
 
 
 
