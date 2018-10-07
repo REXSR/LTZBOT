@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
 let ar = JSON.parse(fs.readFileSync(`AutoRole.json`, `utf8`))
-
+const fs = require('fs')
 
 
 client.on('ready', () => {
