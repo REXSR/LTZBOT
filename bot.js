@@ -1,6 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
+let ar = JSON.parse(fs.readFileSync(`AutoRole.json`, `utf8`))
+
+
+
 client.on('ready', () => {
 
     console.log(`Logged in as ${client.user.tag}!`);
